@@ -8,6 +8,7 @@
         </svg>
         <span class="title">歌单</span>
       </div>
+     <!--  $router.push('/search') -->
       <div class="right">
         <svg class="icon search" aria-hidden="true" @click="search()">
           <use xlink:href="#icon-sousuo"></use>
@@ -68,12 +69,14 @@
 </template>
 
 <script>
+/* import {useRouter} from 'vue-router' */
+import router from "@/router/index.js"
 export default {
   props: ["playlist"],
   setup() {
-    /*   search(){
-      this.$router.push('/search')
-    }; */
+     function search(){
+      router.push('/search')
+    };
     function changevalue(num) {
       let res = 0;
       if (num >= 100000000) {
@@ -85,7 +88,7 @@ export default {
       }
       return res;
     }
-    return { changevalue };
+    return { changevalue ,search};
   },
 };
 </script>

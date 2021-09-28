@@ -23,7 +23,7 @@ export default {
       playlist: {creator:[],tracks:[{ar:[]}],al:[],},
     });
     onMounted(async () => {
-     /*  console.log(route); */
+      console.log(route);
       let id = route.query.id;
       let res = await getMusiclist(id);
      store.commit('setPlaylist',res.data.playlist.tracks)

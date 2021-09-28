@@ -18,7 +18,9 @@ export default createStore({
         playcurrentindex: 0,
         lyric: [{}, ],
         currentTime: 0,
-        intervalid: 0
+        intervalid: 0,
+        paused: true,
+        showplay: false
     },
     getters: {
         lyriclist: function(state) {
@@ -120,6 +122,12 @@ export default createStore({
         },
         setcurrentTime: function(state, value) {
             state.currentTime = value
+        },
+        setpaused: function(state, value) {
+            state.paused = value
+        },
+        setshow: function(state, value) {
+            state.showplay = value
         }
     },
     actions: {
@@ -127,10 +135,10 @@ export default createStore({
             /* console.log(playid); */
             let res = await api.getlyric(playid)
             content.commit("setlyric", res.data.lrc.lyric)
-            console.log(res);
-            /* console.log(res);
-            console.log(res.data.lrc); */
-            /*  console.log(res.data.lrc.lyric); */
+                /*  console.log(res); */
+                /* console.log(res);
+                console.log(res.data.lrc); */
+                /*  console.log(res.data.lrc.lyric); */
         }
     },
     modules: {}

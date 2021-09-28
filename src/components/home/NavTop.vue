@@ -36,8 +36,8 @@ export default {
          path:'/cloud' },
         { name: "音乐",
         path:'/music' },
-        { name: "发现",
-        path:'/find' },
+        { name: "排行",
+        path:'/rank' },
       ],
     };
   },

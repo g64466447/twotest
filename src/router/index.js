@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 
-
+import playdetail from '../views/playdetail.vue'
 
 const routes = [{
         path: '/',
@@ -37,21 +37,16 @@ const routes = [{
 
             },
             {
-                path: 'find',
-                name: 'find',
+                path: 'rank',
+                name: 'rank',
                 component: () =>
-                    import ( /* webpackChunkName: "about" */ '../views/children/Find.vue')
+                    import ( /* webpackChunkName: "about" */ '../views/children/Rank.vue')
             },
+
         ]
-    },
-    {
-        path: '/about',
-        name: 'About',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-            import ( /* webpackChunkName: "about" */ '../views/About.vue')
+    }, {
+        path: '/playdetail',
+        component: playdetail
     }, {
         path: '/search',
         name: 'search',

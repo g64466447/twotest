@@ -53,6 +53,7 @@ export default {
 <style lang="less" scoped>
 .swiper{
   width: 7.5rem;
+  padding:0 0 0.3rem 0;
 }
 .swiper-container {
   width: 7.1rem;

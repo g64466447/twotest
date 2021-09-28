@@ -54,7 +54,7 @@ export default {
     }
     onMounted(async () => {
       let res = await getSilde(10);
-      console.log(res);
+      /* console.log(res); */
       state.slide = res.data.result;
     });
     onUpdated(() => {
@@ -108,8 +108,8 @@ export default {
 <style lang="less" scoped>
 .silde {
   width: 7.5rem;
-  margin: 0.5rem 0 0 0;
-  height: 0.3rem;
+  margin:  0 0 1rem 0;
+  height: 3rem;
   .sildeone {
     display: flex;
     margin: 0.2rem 0.2rem;

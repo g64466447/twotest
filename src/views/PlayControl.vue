@@ -31,7 +31,6 @@
         :play="play"
         v-show="show"
         :playlist="playlist[playcurrentindex]"
-       
       ></play-music>
 
       <audio
@@ -45,42 +44,45 @@
 <script>
 /* E:\musicapp\src\components\play\PlayMusic.vue */
 import PlayMusic from "@/components/play/PlayMusic.vue";
-import { mapState, mapMutations } from "vuex";
+import { mapState } from "vuex";
 export default {
   data() {
     return {
-      paused: true,
       show: false,
     };
   },
   mounted() {
-    console.log( [this.$refs.audio]);
+   /*  console.log([this.$refs.audio]); */
     this.$store.dispatch(
       "requirelyric",
       this.playlist[this.playcurrentindex].id
     );
-    this.updatatime()
-    
+    this.updatatime();
+    console.log(this.paused);
+    console.log(this.showplay);
   },
   updated() {
-    
     this.$store.dispatch(
       "requirelyric",
       this.playlist[this.playcurrentindex].id
     );
-     this.updatatime()
+    this.updatatime();
   },
   methods: {
-    play: function () {
-      console.log(this.$refs.audio.currentTime);
-      if (this.$refs.audio.paused) {
+    play () {
+      if (this.paused) {
         this.$refs.audio.play();
-        this.paused = false;
-         this.updatatime()
+        let paused = !this.paused;
+       /*  console.log(this.$refs.audio.paused); */
+        this.$store.commit("setpaused", paused);
+       /*  console.log(paused); */
+        this.updatatime();
       } else {
         this.$refs.audio.pause();
-        this.paused = true;
-        clearInterval(this.$store.state.id)
+        let paused = !this.paused;
+       
+        this.$store.commit("setpaused", paused);
+        clearInterval(this.$store.state.id);
       }
     },
     updatatime() {
@@ -89,11 +91,22 @@ export default {
       }, 1000);
     },
   },
+  watch:{
+    showplay(){
+      if(this.showplay){
+        console.log(this.showplay);
+       /*  this.$store.commit('setpaused',false) */
+       /*  console.log(this.paused); */
+        this.play()
+        /* console.log(this.play()); */
+      }
+    }
+  },
   components: {
     PlayMusic,
   },
   computed: {
-    ...mapState(["playlist", "playcurrentindex"]),
+    ...mapState(["playlist", "playcurrentindex", "paused",'showplay']),
   },
 };
 </script>

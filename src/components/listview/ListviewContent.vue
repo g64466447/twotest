@@ -41,9 +41,14 @@
         </div>
 
         <div class="right">
-          <div>
-            <svg class="icon" aria-hidden="true" @click="setPlaycurrentindex(index)">
+          <div v-show="state.showicon" >
+            <svg class="icon" aria-hidden="true" @click="showplay(index)">
               <use xlink:href="#icon-bofang"></use>
+            </svg>
+          </div>
+          <div v-show="!state.showicon">
+            <svg class="icon" aria-hidden="true" @click="showplay(index)">
+              <use xlink:href="#icon-ico_zanting_xuanzhong"></use>
             </svg>
           </div>
           
@@ -60,12 +65,14 @@
 
 <script>
 import {mapMutations} from 'vuex'
+import store from '@/store/index.js'
+import { reactive,onMounted} from 'vue'
 export default {
   props: ["playlist"],
   setup() {
-    function play(index){
-      
-    }
+    let state = reactive({
+     showicon:true
+    });
     function changevalue(num) {
       let res = 0;
       if (num >= 100000000) {
@@ -77,8 +84,21 @@ export default {
       }
       return res;
     }
+     onMounted( () => {
+     /*  console.log(state); */
+    });
+    function showplay(index){ 
+      console.log(state);
+      state.showicon =!state.showicon
+       store.commit("setPlaycurrentindex",index)
+       store.commit("setshow",true)
+      /* this.setPlaycurrentindex(index) */
+      /* console.log(this.setPlaycurrentindex());
+      console.log(this.$store); */
+       /* return */
+    }
     return {
-      changevalue,...mapMutations(['setPlaycurrentindex'])
+      changevalue,...mapMutations(['setPlaycurrentindex']),showplay,state
     };
   },
 };

@@ -1,8 +1,7 @@
 <template>
   <div class="home">
     <nav-top @routechang="routechang"></nav-top>
-    <router-view>
-    
+    <router-view>    
     </router-view>
     <!-- <swiper/>
   <silde> </silde> -->
@@ -26,12 +25,11 @@ export default {
   },
   methods:{
     routechang(path){
-      
       this.$router.push(path)
     }
   },
   mounted() {
-    console.log(this.$route);
+   /*  console.log(this.$route); */
   },
    
   
