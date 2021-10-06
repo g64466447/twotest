@@ -70,8 +70,24 @@ const routes = [{
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () =>
-            import ( /* webpackChunkName: "about" */ '../views/VideoPlay.vue')
-    }
+            import ( /* webpackChunkName: "about" */ '../views/VueMap.vue')
+    }, {
+        path: '/comment',
+        component: () =>
+            import ( /* webpackChunkName: "about" */ '../views/ComMent.vue')
+    }, {
+        path: '/commentlist/:id',
+        component: () =>
+            import ( /* webpackChunkName: "about" */ '../views/CommentList.vue')
+    },
+
+    {
+        path: '/active',
+        component: () =>
+            import ( /* webpackChunkName: "about" */ '../views/Active.vue')
+    },
+
+
 
 ]
 

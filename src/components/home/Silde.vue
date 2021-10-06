@@ -6,10 +6,13 @@
     </div>
     <div class="swiper-container" id="yang">
       <div class="swiper-wrapper">
-        <router-link :to="{path:'listview',
-        query:{
-          id:item.id
-        }}"
+        <router-link
+          :to="{
+            path: 'listview',
+            query: {
+              id: item.id,
+            },
+          }"
           class="swiper-slide"
           v-for="(item, index) in state.slide"
           :key="index"
@@ -108,7 +111,7 @@ export default {
 <style lang="less" scoped>
 .silde {
   width: 7.5rem;
-  margin:  0 0 1rem 0;
+  margin: 0 0 1rem 0;
   height: 3rem;
   .sildeone {
     display: flex;

@@ -6,6 +6,9 @@ module.exports = {
                 title: '仿网易云音乐'
             }
         },
+        /* devServer: {
+            port: 57103 // 端口号配置
+        }, */
 
         chainWebpack: config => {
             config.module
@@ -17,6 +20,11 @@ module.exports = {
                     limit: 10000
                 })
         },
+        /*  configureWebpack: {
+             externals: {
+                 'Amap': 'Amap'
+             }
+         } */
 
         /*  pluginOptions: {
              'style-resources-loader': {

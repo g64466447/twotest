@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <nav-top @routechang="routechang"></nav-top>
+    <!-- @routechang="routechang" -->
+    <nav-top ></nav-top>
     <router-view>    
     </router-view>
     <!-- <swiper/>

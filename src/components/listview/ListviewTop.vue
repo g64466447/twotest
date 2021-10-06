@@ -40,7 +40,7 @@
       </div>
     </div>
     <div class="iconlist">
-      <div>
+      <div @click=comment()>
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-pinglun"></use>
         </svg>
@@ -69,14 +69,21 @@
 </template>
 
 <script>
-/* import {useRouter} from 'vue-router' */
-import router from "@/router/index.js"
+import {useRouter,useRoute} from 'vue-router'
+/* import router from "@/router/index.js" */
 export default {
   props: ["playlist"],
   setup() {
+    const router =useRouter()
+    const route=useRoute()
      function search(){
       router.push('/search')
     };
+    function comment() {
+     
+      const id =route.query.id
+       router.push(`/commentlist/${id}`)
+    }
     function changevalue(num) {
       let res = 0;
       if (num >= 100000000) {
@@ -88,7 +95,7 @@ export default {
       }
       return res;
     }
-    return { changevalue ,search};
+    return { changevalue ,search,comment};
   },
 };
 </script>

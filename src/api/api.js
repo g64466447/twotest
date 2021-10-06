@@ -5,22 +5,27 @@ let baseurl = 'http://music.cpengx.cn'
     1: android
     2: iphone
     3: ipad */
+    /* 轮播图 */
 export function getBanner(type = 1) {
     return axios.get(`${baseurl}/banner?type=${type}`)
         /* return axios.get('https://autumnfish.cn/banner?type=${type}') */
 }
+/* 推荐歌单 */
 export function getSilde(limit = 10) {
     return axios.get(`${baseurl}/personalized?limit=${limit}`)
         /* return axios.get('https://autumnfish.cn/banner?type=${type}') */
 }
+/* 获取歌单详情 */
 export function getMusiclist(id) {
     return axios.get(`${baseurl}/playlist/detail?id=${id}`)
         /* return axios.get('https://autumnfish.cn/banner?type=${type}') */
 }
+/* 获取歌词 */
 export function getlyric(id) {
     return axios.get(`${baseurl}/lyric?id=${id}`)
         /* return axios.get('https://autumnfish.cn/banner?type=${type}') */
 }
+/* 搜索 */
 export function getsearch(keywords) {
     return axios.get(`${baseurl}/search?keywords= ${keywords}`)
         /* return axios.get('https://autumnfish.cn/banner?type=${type}') */
@@ -29,6 +34,7 @@ export function getsearch(keywords) {
 this.rank = res.data;
 
 console.log(res); */
+/* 所有榜单 */
 export function getToplist() {
     return axios.get(`${baseurl}/toplist`)
         /* return axios.get('https://autumnfish.cn/banner?type=${type}') */
@@ -59,7 +65,12 @@ export function GetArtistCategory(offset = 0, limit = 7) {
     return axios.get(`${baseurl}/artist/list?offset=${offset}&limit=${limit}`)
         /* return axios.get('https://autumnfish.cn/banner?type=${type}') */
 }
-
+/* 歌单评论 */
+/* /comment/playlist?id=705123491 */
+export function getplaylistcomment(id, limit = 10) {
+    return axios.get(`${baseurl}/comment/playlist?id=${id}&limit=${limit}`)
+        /* return axios.get('https://autumnfish.cn/banner?type=${type}') */
+}
 export default {
     getBanner,
     getMusiclist,
@@ -70,5 +81,6 @@ export default {
     getdetail,
     getnewsong,
     getartist,
-    GetArtistCategory
+    GetArtistCategory,
+    getplaylistcomment
 }

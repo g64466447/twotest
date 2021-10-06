@@ -30,6 +30,8 @@ export function getsearch(keywords) {
     return axios.get(`/api/search?keywords= ${keywords}`)
         /* return axios.get('https://autumnfish.cn/banner?type=${type}') */
 }
+/* 歌单评论 */
+/* /comment/playlist?id=705123491 */
 
 export default {
     getBanner,

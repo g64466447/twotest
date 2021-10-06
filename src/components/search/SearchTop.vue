@@ -20,8 +20,8 @@ S<template>
     <div class="history" v-show="musclist.length==0">
       <div class="historyleft">历史</div>
       <div class="historyright">
-        <div v-for="(item, index) in keywordlist" :key="index">
-          <span class="itemspan" @click="SearchHistory(item)">{{ item }}</span>
+        <div v-for="(item, index) in keywordlist" :key="index" @click="SearchHistory(item)" >
+          {{ item }}
         </div>
       </div>
     </div>
@@ -63,6 +63,7 @@ export default {
   .history {
     padding: 0 0.4rem;
     margin: 0.2rem 0;
+    height: 0.6rem;
     display: flex;
     overflow: hidden;
     /* scrollbar-width: none; */
@@ -76,8 +77,10 @@ export default {
     .historyright {
       display: flex;
       width: 5.3rem;
+      height: 0.8rem;
       overflow-x: auto;
       overflow-y: hidden;
+      /* flex-wrap: nowrap; */
       /*  ::-webkit-scrollbar{
         width: 0;
       } */
@@ -86,7 +89,9 @@ export default {
         flex-shrink: 0;
         text-align: center;
         line-height: 0.6rem;
-        background-color: #ccc;
+        height: 0.6rem;
+        
+        background-color: rgb(243, 243, 243);
         margin: 0 0.25rem;
         border-radius: 0.3rem;
       }
