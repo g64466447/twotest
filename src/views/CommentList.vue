@@ -1,8 +1,8 @@
 <template>
   <div>
     <comment-top :total="obj.commentlist.total"></comment-top>
-    <comment-middle></comment-middle>
-    <comment-content :commentlist='obj.commentlist.hotComments'></comment-content>
+    <comment-middle @onback=onback></comment-middle>
+    <comment-content :commentlist='obj.comments'></comment-content>
    <!--  <van-skeleton title="xaxa" avatar :row="3"> </van-skeleton> -->
   </div>
 </template>
@@ -20,8 +20,20 @@ export default {
   },
   setup() { const route = useRoute();
      /*  const route =useRoute(); */
+     const onback=(index)=>{
+       console.log(index);
+       if(index==1){
+         obj.comments=obj.commentlist.comments
+        
+       }
+       
+       else{
+         obj.comments=obj.commentlist.hotComments
+       }
+     };
     const loading = ref(true);
     const obj = reactive({
+      comments:[],
     commentlist:[]
     });
     onMounted(async () => {
@@ -35,12 +47,13 @@ export default {
                console.log(res);
        }, 2000); */ console.log(res);
       obj.commentlist = res.data;
+      obj.comments=res.data.hotComments
       console.log(res.data.hotComments[0].time);
     });
 
     return {
       loading,
-      obj,
+      obj,onback
     };
   },
 };

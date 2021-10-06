@@ -51,7 +51,7 @@
 
 <script>
 
-import { reactive } from "vue";
+import { reactive,ref } from "vue";
 
 export default {
    
