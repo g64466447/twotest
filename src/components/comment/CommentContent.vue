@@ -9,22 +9,28 @@
       <div class="two">
         <div class="commenttitle">
           <div>
-            <p class="imgp" style="color: #bfbebe;">
+            <p class="imgp" style="color: #bfbebe">
               {{ item.user.nickname }}
               <img
-              v-if="item.user.vipRights!==null&&item.user.vipRights.associator.rights"
+                v-if="
+                  item.user.vipRights !== null &&
+                  item.user.vipRights.associator.rights
+                "
                 :src="item.user.avatarUrl"
                 alt=""
                 style="
                   width: 0.5rem;
                   height: 0.3rem;
-                  margin-left: 0.1rem;border-radius: 0.08rem;
+                  margin-left: 0.1rem;
+                  border-radius: 0.08rem;
                 "
               />
             </p>
             <p class="psize">
               09月30日
-              <span style="color: red" v-if="item.user.vipType!==0">热评</span>
+              <span style="color: red" v-if="item.user.vipType !== 0"
+                >热评</span
+              >
             </p>
           </div>
           <div class="goodjob" style="position: relative">
@@ -32,40 +38,60 @@
             <van-icon name="good-job-o" class="goodicon" size="18" />
           </div>
         </div>
-        <div style="width: 5.5rem;font-weight: 600;">
+        <div style="width: 5.5rem; font-weight: 600">
           {{ item.content }}
 
-          <p style="color: blue; font-size: 0.23rem" @click="show=!show">{{item.likedCount}}条回复 ></p>
+          <p style="color: blue; font-size: 0.23rem" @click="changeshow(index)">
+            {{ item.likedCount }}条回复 >
+          </p>
         </div>
       </div>
     </div>
-   <van-popup
-        v-model:show="show"
-        position="bottom"
-        class="popup"
-        :style="{ width: '100%', height: '80%' }"
-      >
-   </van-popup>
+    <van-popup
+      v-model:show="obj.show"
+      position="bottom"
+      class="popup"
+      :style="{ width: '100%', height: '80%' }"
+    >
+      <div>
+     <!--    <comment-child :list="hotlist[obj.index]"></comment-child> -->
+        <comment-child :list="hotlist"></comment-child>
+
+        <!--  <commentcontent-child  :list='hotlist' style="height:300px"></commentcontent-child> -->
+      </div>
+    </van-popup>
+
+   <!--  <comment-child :list="commentlist" style="height: 300px"></comment-child>
+    <comment-child :list="hotlist" style="height: 300px"></comment-child> -->
   </div>
 </template>
 
 <script>
-
-import { reactive,ref } from "vue";
-
+import { reactive, ref } from "vue";
+import CommentContentchild from "./CommentContentchild.vue";
+import CommentChild from "./CommentChild.vue";
 export default {
-   
-    props:['commentlist'],
+  components: {
+    CommentContentchild,
+    CommentChild,
+  },
+  props: ["commentlist", "hotlist"],
   setup(props) {
-    const show=ref(false)
     
-   
+    
+
+    /*  const yang=ref(hotlist); */
     const obj = reactive({
       commentlist: [],
+      index: 0,
+      show:false
     });
-   
-    return { obj,props,show};
-  
+    function changeshow(index) {
+      obj.index = index;
+     obj.show = !obj.show;
+     console.log(obj.index);
+    }
+    return { obj, props, changeshow };
   },
 };
 </script>

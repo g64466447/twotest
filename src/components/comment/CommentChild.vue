@@ -2,14 +2,14 @@
   <div>
     <div
       class="commentcontent"
-      v-for="(item, index) in  obj.commentlist"
+      v-for="(item, index) in list"
       :key="index"
     >
-      <div class="one"><img :src="item.user.avatarUrl" alt="" /></div>
+      <div class="one" v-if="item.user&&item.user.avatarUrl"><img :src="item.user.avatarUrl" alt="" /></div>
       <div class="two">
         <div class="commenttitle">
           <div>
-            <p class="imgp">
+            <p class="imgp" style="color: #bfbebe;" v-if=" item.user.nickname ">
               {{ item.user.nickname }}
               <img
               v-if="item.user.vipRights!==null&&item.user.vipRights.associator.rights"
@@ -32,39 +32,34 @@
             <van-icon name="good-job-o" class="goodicon" size="18" />
           </div>
         </div>
-        <div style="width: 5.5rem">
+        <div style="width: 5.5rem;font-weight: 600;">
           {{ item.content }}
 
-       <!--  <div style="padding:0 20px"><child-content :list='obj.commentlist.comments'></child-content></div> -->
+          <p style="color: blue; font-size: 0.23rem" @click="show=!show">{{item.likedCount}}条回复 ></p>
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
 <script>
-import { reactive, onMounted } from "vue";
-import { getplaylistcomment } from "@/api/api.js";
-import { useRoute } from "vue-router";
+
+import { reactive,ref } from "vue";
+
 export default {
-/*   name:"childcontent", */
-  props:['list'],
-  setup() {
-    const route = useRoute();
+  
+    props:['list'],
+  setup(props) {
+    const show=ref(false)
+    
+  /*  const yang=ref(hotlist); */
     const obj = reactive({
       commentlist: [],
     });
-    onMounted(async () => {
-      console.log(route.params);
-      const id = route.params.id;
-      console.log(id);
-    
-      const res = await getplaylistcomment(id, 2);
-       console.log(res);
-      obj.commentlist = res.data.comments;
-     
-    });
-    return { obj };
+   
+    return { obj,props,show};
+  
   },
 };
 </script>

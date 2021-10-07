@@ -2,7 +2,7 @@
   <div>
     <comment-top :total="obj.commentlist.total"></comment-top>
     <comment-middle @onback=onback></comment-middle>
-    <comment-content :commentlist='obj.comments'></comment-content>
+    <comment-content :commentlist='obj.comments' :hotlist="obj.commentlist.hotComments"></comment-content>
    <!--  <van-skeleton title="xaxa" avatar :row="3"> </van-skeleton> -->
   </div>
 </template>
@@ -48,7 +48,7 @@ export default {
        }, 2000); */ console.log(res);
       obj.commentlist = res.data;
       obj.comments=res.data.hotComments
-      console.log(res.data.hotComments[0].time);
+      /* console.log(res.data.hotComments[0].time); */
     });
 
     return {
