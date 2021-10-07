@@ -72,10 +72,6 @@ const routes = [{
         component: () =>
             import ( /* webpackChunkName: "about" */ '../views/VueMap.vue')
     }, {
-        path: '/comment',
-        component: () =>
-            import ( /* webpackChunkName: "about" */ '../views/ComMent.vue')
-    }, {
         path: '/commentlist/:id',
         component: () =>
             import ( /* webpackChunkName: "about" */ '../views/CommentList.vue')

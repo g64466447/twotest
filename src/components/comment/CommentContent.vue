@@ -5,11 +5,17 @@
       v-for="(item, index) in commentlist"
       :key="index"
     >
-      <div class="one"><img :src="item.user.avatarUrl" alt="" /></div>
+      <div class="one" v-if="item.user && item.user.avatarUrl">
+        <img :src="item.user.avatarUrl" alt="" />
+      </div>
       <div class="two">
         <div class="commenttitle">
           <div>
-            <p class="imgp" style="color: #bfbebe">
+            <p
+              class="imgp"
+              style="color: #bfbebe"
+              v-if="item.user && item.user.nickname"
+            >
               {{ item.user.nickname }}
               <img
                 v-if="
@@ -54,42 +60,33 @@
       :style="{ width: '100%', height: '80%' }"
     >
       <div>
-     <!--    <comment-child :list="hotlist[obj.index]"></comment-child> -->
+        <!--    <comment-child :list="hotlist[obj.index]"></comment-child> -->
         <comment-child :list="hotlist"></comment-child>
-
-        <!--  <commentcontent-child  :list='hotlist' style="height:300px"></commentcontent-child> -->
       </div>
     </van-popup>
-
-   <!--  <comment-child :list="commentlist" style="height: 300px"></comment-child>
-    <comment-child :list="hotlist" style="height: 300px"></comment-child> -->
   </div>
 </template>
 
 <script>
 import { reactive, ref } from "vue";
-import CommentContentchild from "./CommentContentchild.vue";
+
 import CommentChild from "./CommentChild.vue";
 export default {
   components: {
-    CommentContentchild,
     CommentChild,
   },
   props: ["commentlist", "hotlist"],
   setup(props) {
-    
-    
-
     /*  const yang=ref(hotlist); */
     const obj = reactive({
       commentlist: [],
       index: 0,
-      show:false
+      show: false,
     });
     function changeshow(index) {
       obj.index = index;
-     obj.show = !obj.show;
-     console.log(obj.index);
+      obj.show = !obj.show;
+     /*  console.log(obj.index); */
     }
     return { obj, props, changeshow };
   },

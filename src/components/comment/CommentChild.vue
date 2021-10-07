@@ -35,7 +35,9 @@
         <div style="width: 5.5rem;font-weight: 600;">
           {{ item.content }}
 
-          <p style="color: blue; font-size: 0.23rem" @click="show=!show">{{item.likedCount}}条回复 ></p>
+          <div style="padding:0 40px ">
+             <child-comment :list='list[0]'></child-comment>
+          </div>
         </div>
       </div>
     </div>
@@ -48,7 +50,7 @@
 import { reactive,ref } from "vue";
 
 export default {
-  
+  name:'childcomment',
     props:['list'],
   setup(props) {
     const show=ref(false)

@@ -21,7 +21,7 @@ export default {
   setup() { const route = useRoute();
      /*  const route =useRoute(); */
      const onback=(index)=>{
-       console.log(index);
+       /* console.log(index); */
        if(index==1){
          obj.comments=obj.commentlist.comments
         
@@ -37,15 +37,15 @@ export default {
     commentlist:[]
     });
     onMounted(async () => {
-      console.log(route.params);
+     
       const id = route.params.id;
-      console.log(id);
+     
       /*       const res=await getplaylistcomment(705123491); */
       const res = await getplaylistcomment(id, 5);
       /*   setTimeout(async() => {
            const res=await getplaylistcomment(19723756);
                console.log(res);
-       }, 2000); */ console.log(res);
+       }, 2000); */ 
       obj.commentlist = res.data;
       obj.comments=res.data.hotComments
       /* console.log(res.data.hotComments[0].time); */
