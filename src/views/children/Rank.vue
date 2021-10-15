@@ -22,7 +22,7 @@ export default {
     async getrank() {
       const res = await getToplist();
       this.rank = res.data;
-      console.log(res);
+      
     },
    /*  rankclick(id){
       this.$emit('rankclick',id)

@@ -46,7 +46,7 @@
         </svg>
         <span>{{ playlist.commentCount }}</span>
       </div>
-      <div>
+      <div @click="$router.push('/active')">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-fenxiang"></use>
         </svg>

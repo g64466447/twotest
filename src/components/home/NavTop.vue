@@ -6,7 +6,7 @@
           <use xlink:href="#icon-liebiao"></use>
         </svg>
       </div>
-      <div class="two">
+      <div class="two">   
         <span
           v-for="(item, index) in state.list"
           :key="index"
@@ -21,12 +21,13 @@
         </svg>
       </div>
     </div>
-      <!-- <div class="userpopup"  > -->
+     
       <van-popup
         v-model:show="show"
         position="left"
         class="popup"
         :style="{ width: '77%', height: '100%' }"
+        style="background-color: #f5f0f0;"
       >
         <div class="popuptop">
           <div class="one">
@@ -125,15 +126,12 @@
       </van-popup>
     
 
-    <!--   </div> -->
-    <!--   <van-config-provider :theme-vars="themeVars">
-    </van-config-provider> -->
   </div>
 </template>
 
 <script>
 import { reactive, onMounted } from "vue";
-import { useRouter } from "vue-router";
+import { useRoute,useRouter } from "vue-router";
 import { ref } from "vue";
 export default {
   setup() {
@@ -141,6 +139,7 @@ export default {
       popupbackgroundcolor: "red",
     };
     const show = ref(false);
+    const route=useRoute();
     const router = useRouter();
     const showPopup = () => {
       show.value = true;
@@ -250,7 +249,7 @@ export default {
           },
         ],
       },
-      /* check: false, */
+    
       checkindex: 0,
       list: [
         { name: "我的", path: "/userinfo" },
@@ -260,15 +259,15 @@ export default {
       ],
     });
     onMounted(() => {
-      console.log(state.checkindex);
-      console.log(state.list);
-      console.log(!show.value);
+     
     });
     function isactive(path) {
-      if (path === router.path) {
-        return true;
+     /* console.log(path);
+     console.log(route); */
+      if (path === route.path) {
+        return true; 
       }
-      if (path === "/cloud" && router.path === "/") {
+      if (path === "/cloud" && route.path === "/") {
         return true;
       }
       return false;
@@ -277,7 +276,7 @@ export default {
       state.checkindex = index;
       router.push(item.path);
 
-      /*  emit("routechang", item.path); */
+     
     }
     function search() {
       router.push("/search");
@@ -335,6 +334,7 @@ export default {
 </script>
 
 <style lang="less"  >
+
 /* .userpopup{
   overflow: hidden;
   width: 278px;
@@ -345,13 +345,7 @@ export default {
 .popup{
   margin-right:-10px;
 }
-/* .popup ::-webkit-scrollbar{
-  display: none;
-} */
-/* --van-popup-background-color */
-/* :root {
-  --van-popup-background-color: red;
-} */
+
 .van-popup {
   background-color: rgb(245, 240, 240);
 }
@@ -488,6 +482,7 @@ export default {
     font-size: 0.33rem;
     .active {
       font-weight: 900;
+      color:red;
     }
   }
   .three {

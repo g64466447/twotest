@@ -1,18 +1,18 @@
 <template>
   <div>
     <div>
-      <div class="activecontent">
-        <div class="one">
-          <img src="@/assets/1.jpg" alt="" />
+      <div class="activecontent" v-for="(item,index) in activelist" :key="index">
+        <div class="activeleft">
+          <img :src="item.user.avatarUrl" alt="" />
         </div>
-        <div class="two">
-          <div class="activetitle">
+        <div class="activeright">
+          <div class="activetop">
             <div>
-              <p class="imgp" style="color: #bfbebe">
-                <span> 已有的</span>
+              <p class="activeuserinfo" style="color: #bfbebe">
+                <span> {{item.user.signature}}</span>
                 <img
-                  v-if="obj.vip"
-                  src="@/assets/1.jpg"
+                  v-if="item.user.vipRights&&item.user.vipRights.associator.rights"
+                  :src="item.user.avatarUrl"
                   alt=""
                   style="
                     width: 0.5rem;
@@ -21,39 +21,49 @@
                     border-radius: 0.08rem;
                   "
                 />
-                <span> 发表 </span>
+                <span> {{item.user.nickname}} </span>
               </p>
-              <p class="psize">111粉丝</p>
+              <p>{{item.user.province}}粉丝</p>
             </div>
-            <div class="goodjob" style="position: relative">
+            <div class="activefollow" style="position: relative">
               <span>+ 关注</span>
               <!-- <span class="num">xxxx</span>
             <van-icon name="good-job-o" class="goodicon" size="18" /> -->
             </div>
           </div>
-          <div style="width: 5.5rem; font-weight: 600" class="activeimg">
+          <div style="width: 5.5rem; font-weight: 600" class="activebottom">
             <p>
-              <span style="color: blue">#下啊阿信啊#</span>
-              {{ changevalue(obj.text) }}
-              <span style="color: blue" v-if="obj.text.length > 99"
+              <span style="color: blue">#{{item.user.nickname}}#</span>
+              {{ changevalue(item.json) }}
+             <!--  <span style="color: blue" v-if="obj.text.length > 99"
                 >...查看全文</span
-              >
+              > -->
             </p>
 
-            <div class="showimgtypeone" v-if="obj.imglist.length ==1">
-              <img :src="obj.imglist.imgurl" alt="" />
+            <div class="activeshowimgtypeone" v-if="obj.imglist.length == 1">
+              <img :src="item.user.backgroundUrl" alt="" />
             </div>
-            <div class="showimgtypetwo" v-if="obj.imglist.length > 1">
-              <img :src="item.imgurl" alt="" v-for="(item,index) in obj.imglist" :key="index" />
+            <div class="activeshowimgtypetwo" v-if="obj.imglist.length > 1">
+              <img
+                :src="item.imgurl"
+                alt=""
+                v-for="(item, index) in obj.imglist"
+                :key="index"
+              />
             </div>
-            <p style="color: blue" v-if="show">#预计到2050年</p>
-            <div class="activemusic" style="border-radius: 0.1rem;
-    padding: 0.1rem;
-    margin: 0.15rem 0px;
-    background-color: gainsboro;">
+            <p style="color: blue" v-if="item.user.anchor">#{{item.user.nickname}}</p>
+            <div
+              class="activemusic"
+              style="
+                border-radius: 0.1rem;
+                padding: 0.1rem;
+                margin: 0.15rem 0px;
+                background-color: gainsboro;
+              "
+            >
               <div class="activemusicimg">
                 <img
-                  src="@/assets/1.jpg"
+                  :src="item.user.backgroundUrl"
                   style="width: 0.8rem; height: 0.8rem; border-radius: 50%"
                   alt=""
                 />
@@ -62,10 +72,10 @@
                 /></span>
               </div>
               <div style="margin: 0 0.15rem">
-                <P>也就是陆地表面</P> <P>的储水量、也</P>
+                <P>{{item.user.signature}}</P> <P>{{item.user.nickname}}</P>
               </div>
             </div>
-            <p class="activeother">
+            <p class="activefooter">
               <span>
                 <van-icon name="good-job-o" class="goodicon" size="18" /> 转发
               </span>
@@ -98,38 +108,33 @@
 import { reactive } from "vue";
 
 export default {
-  setup() {
+  props:['activelist'],
+  setup(props) {
     /*  const yang=ref(hotlist); */
 
     const obj = reactive({
       activelist: [],
       index: 0,
-          text:'世界气象组织5日警告称，预计到2050年，全球将有50亿人面临水资源短缺问题。据世界气象组织发布的最新报告，2018年，全球就已经至少有36亿人每年至少有一个月面临用水量不足的困境，而到2050年，全球缺水的人数预计将升至50亿。报告指出，过去20年间，地球陆地的储水量、也就是陆地表面和地下的所有水的总和“一直在以每年1厘米的速度下降”，而且',
-      
-      /* text: "界气象组织5日警告称，预计到2", */
-      show: false,
-      vip: false,
+      text: "世界气象组织5日警告称，预计到2050年，全球将有50亿人面临水资源短缺问题。据世界气象组织发布的最新报告，2018年，全球就已经至少有36亿人每年至少有一个月面临用水量不足的困境，而到2050年，全球缺水的人数预计将升至50亿。报告指出，过去20年间，地球陆地的储水量、也就是陆地表面和地下的所有水的总和“一直在以每年1厘米的速度下降”，而且",
+      show: true,
+      vip: true,
       imglist: [
         {
           imgurl: require("../../assets/1.jpg"),
-         
-        },  {
-           imgurl: require("../../assets/1.jpg"),
-         
         },
+       
       ],
     });
-    function changevalue() {
-      if (obj.text.length > 100) {
-        const x = obj.text.slice(0, 100);
-        obj.text = x;
-        console.log(x);
-        console.log(obj.imglist.length);
+    function changevalue(value) {
+      if (value.length > 100) {
+        const x = value.slice(0, 100);
+        return x
+     
       } else {
-        return obj.text;
+        return value
       }
     }
-    return { obj, changevalue };
+    return { obj, changevalue,props };
   },
 };
 </script>
@@ -143,7 +148,7 @@ export default {
     margin: 0;
     padding: 0;
   }
-  .one {
+  .activeleft {
     flex-shrink: 0;
     img {
       width: 0.8rem;
@@ -152,9 +157,13 @@ export default {
       margin-right: 0.2rem;
     }
   }
-  .two {
-    .activeimg {
-      .showimgtypetwo {
+  .activeright {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    .activebottom {
+      .activeshowimgtypetwo {
         widows: 5.5rem;
         border-radius: 0.3rem;
         overflow: hidden;
@@ -186,7 +195,7 @@ export default {
           }
         }
       }
-      .showimgtypeone {
+      .activeshowimgtypeone {
         widows: 5.5rem;
         display: flex;
         justify-content: space-around;
@@ -197,21 +206,16 @@ export default {
           margin: 0.15rem 0;
         }
       }
-
-      .activeother {
+      .activefooter {
         display: flex;
         justify-content: space-between;
       }
     }
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: space-around;
 
-    .activetitle {
-      .imgp {
+    .activetop {
+      .activeuserinfo {
         width: 3.5rem;
         overflow: hidden;
-
         display: flex;
         align-items: center;
         span {
@@ -219,14 +223,10 @@ export default {
           text-overflow: ellipsis;
         }
       }
-      .psize {
-        font-size: 0.2rem;
-        margin: 0.03rem 0;
-      }
-      width: 5.5rem;
+
       display: flex;
       justify-content: space-between;
-      .goodjob {
+      .activefollow {
         width: 1.8rem;
         height: 0.8rem;
         display: flex;

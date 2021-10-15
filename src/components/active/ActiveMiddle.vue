@@ -6,7 +6,7 @@
         <span
           v-for="(item, index) in titlelist"
           :key="index"
-          :class="{ active: index == obj.checkindex }"
+          :class="{ active: index == obj.checkindex}"
           @click="pop(index)"
         >
           {{ item.name }}

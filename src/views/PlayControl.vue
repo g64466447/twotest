@@ -58,8 +58,8 @@ export default {
       this.playlist[this.playcurrentindex].id
     );
     this.updatatime();
-    console.log(this.paused);
-    console.log(this.showplay);
+  /*   console.log(this.paused);
+    console.log(this.showplay); */
   },
   updated() {
     this.$store.dispatch(

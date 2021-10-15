@@ -71,7 +71,19 @@ export function getplaylistcomment(id, limit = 10) {
     return axios.get(`${baseurl}/comment/playlist?id=${id}&limit=${limit}`)
         /* return axios.get('https://autumnfish.cn/banner?type=${type}') */
 }
+/* http://music.cpengx.cn/user/event?uid=32953014 */
+export function getactive(uid = 32953014, limit = 6) {
+    return axios.get(`${baseurl}/user/event?uid=${uid}&limit=${limit}`)
+        /* return axios.get('https://autumnfish.cn/banner?type=${type}') */
+}
+/* 全部mv */
+export function getallmv(limit = 10) {
+    return axios.get(`${baseurl}/mv/all?area=内地&limit=${limit}`)
+        /* return axios.get('https://autumnfish.cn/banner?type=${type}') */
+}
 export default {
+    getallmv,
+    getactive,
     getBanner,
     getMusiclist,
     getSilde,

@@ -11,7 +11,7 @@ export default createStore({
                 id: 72363263,
                 name: "囍（Chinese Wedding）",
                 pic: 109951163472855060,
-                picUrl: "http://p3.music.126.net/H3Q3SeMVtuHvHY2uyaQdOw==/109951163472855051.jpg",
+                picUrl: require("../assets/1.jpg"),
                 pic_str: "109951163472855051",
             }]
         }],

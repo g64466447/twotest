@@ -82,6 +82,11 @@ const routes = [{
         component: () =>
             import ( /* webpackChunkName: "about" */ '../views/Active.vue')
     },
+    {
+        path: '/yuncun',
+        component: () =>
+            import ( /* webpackChunkName: "about" */ '../views/YunCun.vue')
+    },
 
 
 
